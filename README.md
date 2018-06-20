@@ -1,6 +1,6 @@
-# SocketIO HOC
+# With SocketIO
 
-> [SocketIO](https://socket.io) as a React Higher Order Component
+> React [Higher Order Component](https://reactjs.org/docs/higher-order-components.html) for [SocketIO](https://socket.io)
 
 [![NPM](https://img.shields.io/npm/v/with-socketio.svg)](https://www.npmjs.com/package/with-socketio)
 
@@ -12,7 +12,7 @@ yarn add with-socketio
 
 ## Usage
 
-This is being used as an [Higher Order Component](https://reactjs.org/docs/higher-order-components.html).
+Use it like this:
 
 ```jsx
 import React, { Component } from 'react'
@@ -29,26 +29,28 @@ class MyComponent extends Component {
 
 WithSocketIO(MyComponent, { url, channels });
 ```
-Options:
-```
-url: The url to your SocketIO server (@string)
-channels: The channles you want to listen to (@array)
-```
+
+* url: The url to your SocketIO server (@string)
+* channels: The channles you want to listen to (@array)
+
 
 ### Props
-Your components props:
+
+This HoC adds the props to your component:
+
 ```
-emit: Emit a message (@func)
 [channels]: Your channels (@obj)
+emit: Emit a message (@func)
 ```
 
 ### Emit message
 
-This is how you emit a message:
+You can also emit messages to a channel:
+
 ```
-this.props.emit('channel', 'Hello, Channel!');
+this.props.emit('channel-name', 'Hello, Channel!');
 ```
 
-## License
+#### License
 
 MIT © [fredjens](https://github.com/fredjens)
