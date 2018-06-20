@@ -35,7 +35,7 @@ WithSocket(MyComponent, { url, channels });
 Example:
 ```jsx
 WithSocket(MyComponent, {
-  url: ''http://localhost:5000',
+  url: 'http://localhost:5000',
   channels: ['events', 'data', 'error']
 });
 ```
@@ -49,6 +49,7 @@ This HoC adds the props to your component:
 
 ```
 [channels]: Your channels (@obj)
+error: Error message (@string)
 emit: Emit a message (@func)
 ```
 
