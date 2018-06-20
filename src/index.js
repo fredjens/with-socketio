@@ -1,26 +1,46 @@
-/**
- * @class ExampleComponent
- */
+import React, { Component } from 'react';
+import autoBind from 'react-autobind';
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import io from 'socket.io-client';
 
-import styles from './styles.css'
+export default (Child, options) => {
 
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
+  return class WithSocketIO extends Component {
+    constructor(props) {
+      super(props);
+      autoBind(this);
+
+      this.socket = io(options.url);
+
+      this.state = {
+        loading: true,
+      };
+    }
+
+    emitMsg(channel, msg) {
+      this.socket.on(channel, msg);
+    }
+
+    componentWillMount() {
+      const { channels = []} = options;
+
+      this.socket
+      .on('error', error => {
+        this.setState({ loading: false });
+        console.log(error);
+      });
+
+      channels
+      .forEach(channel => this.socket.on([channel], (data) => {
+        this.setState({
+          [channel]: data,
+          loading: false,
+        })
+      }));
+    }
+
+    render() {
+      return <Child {...this.state} emit={this.emitMsg} />;
+    }
   }
-
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
-}
+};
