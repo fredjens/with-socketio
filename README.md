@@ -61,6 +61,10 @@ You can also emit messages to a channel:
 this.props.emit('channel-name', 'Hello, Channel!');
 ```
 
+---
+
+Made with [Create React Library]('https://github.com/transitive-bullshit/create-react-library')
+
 #### License
 
 MIT © [fredjens](https://github.com/fredjens)
