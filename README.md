@@ -16,8 +16,7 @@ Use it like this:
 
 ```jsx
 import React, { Component } from 'react'
-
-import WithSocketIO from 'with-socketio';
+import WithSocket from 'with-socketio';
 
 class MyComponent extends Component {
   render () {
@@ -27,7 +26,7 @@ class MyComponent extends Component {
   }
 }
 
-WithSocketIO(MyComponent, { url, channels });
+WithSocket(MyComponent, { url, channels });
 ```
 
 * url: The url to your SocketIO server (@string)
