@@ -32,6 +32,16 @@ WithSocket(MyComponent, { url, channels });
 * url: The url to your SocketIO server (@string)
 * channels: The channles you want to listen to (@array)
 
+Example:
+```jsx
+WithSocket(MyComponent, {
+  url: ''http://localhost:5000',
+  channels: ['events', 'data', 'error']
+});
+```
+
+You can then access the `events` socket at `this.props.events`
+
 
 ### Props
 
