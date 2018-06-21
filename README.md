@@ -63,7 +63,7 @@ this.props.emit('channel-name', 'Hello, Channel!');
 
 ---
 
-Made with [Create React Library]('https://github.com/transitive-bullshit/create-react-library')
+Made with [Create React Library](https://github.com/transitive-bullshit/create-react-library)
 
 #### License
 

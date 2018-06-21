@@ -12,28 +12,41 @@ export default (Child, options = {}) => {
     constructor(props) {
       super(props);
       autoBind(this);
+      const { url, channels = []} = options;
 
       /**
        * Invariatints
        */
 
-      if (!options.url) {
+      if (!url) {
         console.log('WithScoketIO: You need to provide a socket.io url');
       }
 
-      if (!Array.isArray(options.channels)) {
-        console.log('WithScoketIO: Channels needs to be an array');
+      if (channels === undefined || channels.length == 0) {
+        console.log('WithScoketIO: Channels needs to be an not empty array');
       }
 
       /**
        * Bind SocketIO client
        */
 
-      this.socket = io(options.url);
+      this.socket = io(url);
+
+      /**
+       * Submitted channels
+       */
+
+      const initialChannelState = channels
+      .reduce((res, channel) => ({...res, [channel]: undefined}), {});
+
+      /**
+       * Initial state
+       */
 
       this.state = {
         loading: true,
         error: undefined,
+        ...initialChannelState,
       };
     }
 
@@ -42,7 +55,8 @@ export default (Child, options = {}) => {
      */
 
     emitMsg(channel, msg) {
-      this.socket.on(channel, msg);
+      this.socket
+      .on(channel, msg);
     }
 
     componentWillMount() {
