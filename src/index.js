@@ -7,11 +7,23 @@ import autoBind from 'react-autobind';
 
 import io from 'socket.io-client';
 
-export default (Child, options) => {
+export default (Child, options = {}) => {
   return class WithSocketIO extends Component {
     constructor(props) {
       super(props);
       autoBind(this);
+
+      /**
+       * Invariatints
+       */
+
+      if (!options.url) {
+        console.log('WithScoketIO: You need to provide a socket.io url');
+      }
+
+      if (!Array.isArray(options.channels)) {
+        console.log('WithScoketIO: Channels needs to be an array');
+      }
 
       /**
        * Bind SocketIO client
@@ -21,7 +33,7 @@ export default (Child, options) => {
 
       this.state = {
         loading: true,
-        error,
+        error: undefined,
       };
     }
 
@@ -41,7 +53,7 @@ export default (Child, options) => {
        */
 
       this.socket
-      .on('error', error => {
+      .on('error', (error) => {
         console.log(error);
         this.setState({ loading: false, error });
       });
