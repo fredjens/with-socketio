@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-yarn add with-socketio
+yarn add with-socketio socket.io-client
 ```
 
 ## Usage
